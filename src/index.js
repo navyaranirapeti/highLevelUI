@@ -17,9 +17,9 @@ const Home = () => {
       const lSWalletID = localStorage.getItem("id");
       const getWalletDetails = async () => {
         const res = await getWalletDetailsAPI(lSWalletID);
-        setWalletId(res?.body?.[0]?.wallet_id);
-        setWalletName(res?.body?.[0]?.name);
-        setWalletBalance(res?.body?.[0]?.balance);
+        setWalletId(res?.body?.walletId);
+        setWalletName(res?.body?.name);
+        setWalletBalance(res?.body?.balance);
       };
       if (lSWalletID) {
         getWalletDetails();
@@ -30,30 +30,30 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="home">
-      {walletId ? (
-        <div
-          className="wallet-details"
-          style={{ width: showTransactions ? "1200px" : "350px" }}
-        >
-          <DetailsComponent
-            walletName={walletName}
-            balance={walletBalance}
-            walletId={walletId}
-            setBalance={setWalletBalance}
-            setShowTransactions={setShowTransactions}
-            showTransactions={showTransactions}
-          />
-        </div>
-      ) : (
-        <div className="create-wallet">
-          <CreateWalletComponent
-            setWalletId={setWalletId}
-            setWalletName={setWalletName}
-            setWalletBalance={setWalletBalance}
-          />
-        </div>
-      )}
+      <div className="home">
+        {walletId ? (
+          <div
+            className="wallet-details"
+            style={{ width: showTransactions ? "1200px" : "350px" }}
+          >
+            <DetailsComponent
+              walletName={walletName}
+              balance={walletBalance}
+              walletId={walletId}
+              setBalance={setWalletBalance}
+              setShowTransactions={setShowTransactions}
+              showTransactions={showTransactions}
+            />
+          </div>
+        ) : (
+          <div className="create-wallet">
+            <CreateWalletComponent
+              setWalletId={setWalletId}
+              setWalletName={setWalletName}
+              setWalletBalance={setWalletBalance}
+            />
+          </div>
+        )}
     </div>
   );
 };
